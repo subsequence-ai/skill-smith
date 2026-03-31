@@ -6,7 +6,7 @@
 
 A skill-building toolkit for [Claude Code](https://claude.ai/code) built for **Substrate** — a Claude Code operating environment by [Subsequence.ai](https://subsequence.ai). Substrate is currently in beta, and Skill Smith is its second public component after [Subtext](https://github.com/subsequence-ai/subtext).
 
-Skills are evolving from conversational prompts into agent-executable components — tools that orchestrators discover, invoke, and chain without human intervention. A vague description doesn't just confuse a user; it misroutes an entire agent pipeline. A missing edge case section doesn't just produce a weird response; it causes silent failures at 2am. Most skills aren't built for this.
+Skills are evolving from conversational prompts into agent-executable components — tools that orchestrators discover, invoke, and chain in autonomous pipelines. Most skills aren't built for this.
 
 Skill Smith fixes this with three tools: a **skill builder** that encodes research-backed methodology, a **structural validator** that catches defects automatically, and a **trigger evaluator** that tests whether your skill actually fires when it should.
 
