@@ -49,6 +49,8 @@ mkdir -p "$EVAL_DIR"
 
 curl -fsSL "${RAW}/tools/eval/classify-eval.py" -o "$EVAL_DIR/classify-eval.py"
 curl -fsSL "${RAW}/tools/eval/build-skill-catalog.py" -o "$EVAL_DIR/build-skill-catalog.py"
+curl -fsSL "${RAW}/tools/eval/run-eval-batch.sh" -o "$EVAL_DIR/run-eval-batch.sh"
+chmod +x "$EVAL_DIR/run-eval-batch.sh"
 echo "  Installed eval scripts to $EVAL_DIR/"
 
 echo ""
@@ -58,3 +60,4 @@ echo "  Build a skill:     Ask Claude Code to \"create a skill\" or \"build a SK
 echo "  Validate a skill:  bash ~/.claude/tools/validate-skill.sh ~/.claude/skills/my-skill"
 echo "  Build eval catalog: python3 ~/.claude/tools/eval/build-skill-catalog.py"
 echo "  Run trigger eval:  python3 ~/.claude/tools/eval/classify-eval.py --skill my-skill --eval-set evals.json"
+echo "  Run batch eval:   bash ~/.claude/tools/eval/run-eval-batch.sh"

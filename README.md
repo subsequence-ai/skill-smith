@@ -19,6 +19,7 @@ Skill Smith fixes this with three tools: a **skill builder** that encodes resear
 | `skill-smith` | Builds other skills via a 7-phase workflow: qualification, archetype selection, methodology extraction, construction, validation, agent-readiness audit, done gate. |
 | `validate-skill.sh` | 35 automated structural checks — frontmatter, naming, description quality, required sections, content depth, methodology quality, file organization. |
 | `classify-eval.py` | Tests whether Claude routes queries to the correct skill. Finds descriptions that are too vague, too narrow, or that collide with other skills. |
+| `run-eval-batch.sh` | Batch runner for classification evals — runs all skills (or a specified list) sequentially with per-skill results and logs. |
 
 ## Install
 
@@ -81,6 +82,12 @@ python3 classify-eval.py --skill my-skill --eval-set evals.json --verbose
 
 # Multiple runs for statistical confidence
 python3 classify-eval.py --skill my-skill --eval-set evals.json --runs-per-query 3
+
+# Run all skills in batch
+bash run-eval-batch.sh
+
+# Run specific skills in batch
+bash run-eval-batch.sh writing-plans replan handoff
 ```
 
 Eval sets are JSON arrays:
@@ -94,9 +101,11 @@ Eval sets are JSON arrays:
 
 The evaluator sends each query to Claude with your full skill catalog and checks which skill it picks. Reports pass rates, misroutes, and timeouts separately. Use `--skill MULTI` mode with `expected_skill` per query for cross-skill disambiguation testing.
 
+The batch runner produces per-skill JSON results and log files, with a summary line per skill showing pass rate, timeout-excluded pass rate, and timeout count.
+
 ## How it works
 
-**Skill Smith** encodes methodology from a research synthesis of Anthropic's documentation and analysis of 27 production skills. Key insights: descriptions truncate at ~250 chars (front-load routing info), skills under-trigger by default (be slightly pushy), and the 6 required sections each prevent a specific class of failure.
+**Skill Smith** encodes methodology from a research synthesis of Anthropic's official documentation, the wise words of [Nate Jones](https://natejones.substack.com/), and community publications — validated against 27 production skills. Key insights: descriptions truncate at ~250 chars (front-load routing info), skills under-trigger by default (be slightly pushy), and the 6 required sections each prevent a specific class of failure.
 
 **validate-skill.sh** is pure bash, no dependencies. Parses frontmatter, checks naming, validates description heuristics, confirms sections exist with content, flags placeholder text and vague guidance.
 
