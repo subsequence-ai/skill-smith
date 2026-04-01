@@ -17,11 +17,15 @@ Usage:
 
 import argparse
 import json
+import os
 import subprocess
 import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass, field
 from pathlib import Path
+
+# Ensure claude -p uses Pro/Max subscription, not API key billing
+os.environ.pop("ANTHROPIC_API_KEY", None)
 
 
 @dataclass
